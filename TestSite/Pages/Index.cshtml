@@ -14,22 +14,13 @@
 @section scripts {
     
     <script>
-
-        $(function () {
-
-            $("#buttons").on("click", "li", function () {
-                var count = $(this.parent()).children().length;
-
-
-            });
-
-            function test() {
-                
-                $("#1").addClass("active");
-                $("#buttons").append($(`<li id='${count + 1}'><a>${count + 1}</a></li>`));
-            }
-            $("#1").click(test);
-
-        });
+        function test() {
+            var count = $($(this).parent()).children().length;
+            $(this).addClass("active");
+            $("#buttons").append($(`<li id='${count + 1}'><a>${count + 1}</a></li>`));
+            $(this).unbind("click");
+            $($(this).next()).bind("click",test);
+        }
+        $($("#buttons").children()[0]).click(test);
     </script>
 }
