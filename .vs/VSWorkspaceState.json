@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\TestSite",
+    "\\TestSite\\Models",
+    "\\TestSite\\Pages",
+    "\\TestSite\\wwwroot",
+    "\\TestSite\\wwwroot\\lib",
+    "\\TestSite\\wwwroot\\lib\\bootstrap",
+    "\\TestSite\\wwwroot\\lib\\bootstrap\\dist",
+    "\\TestSite\\wwwroot\\lib\\bootstrap\\dist\\css"
+  ],
+  "SelectedNode": "\\TestSite\\Pages\\Index.cshtml",
+  "PreviewInSolutionExplorer": false
+}

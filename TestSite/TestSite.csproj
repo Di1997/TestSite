@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-TestSite-1F8D1FDF-D217-4DE6-924C-8C267CEB26C4</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20181023092344_Simle_User.cs" />
+    <Compile Remove="Data\Migrations\20181023092344_Simle_User.Designer.cs" />
+    <Compile Remove="Data\Migrations\20181023093619_Params.cs" />
+    <Compile Remove="Data\Migrations\20181023093619_Params.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Controls\Accounts\" />
+    <Folder Include="Pages\Controls\Products\" />
+  </ItemGroup>
+
+</Project>

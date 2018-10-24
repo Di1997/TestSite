@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination" id="buttons">
+        <li id="1"><a>1</a></li>
+    </ul>
+</nav>
+
+@section scripts {
+    
+    <script>
+
+        $(function () {
+
+            $("#buttons").on("click", "li", function () {
+                var count = $(this.parent()).children().length;
+
+
+            });
+
+            function test() {
+                
+                $("#1").addClass("active");
+                $("#buttons").append($(`<li id='${count + 1}'><a>${count + 1}</a></li>`));
+            }
+            $("#1").click(test);
+
+        });
+    </script>
+}
