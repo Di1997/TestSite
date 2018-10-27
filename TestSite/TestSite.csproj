@@ -22,4 +22,10 @@
     <Folder Include="Pages\Controls\Products\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Experiments\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

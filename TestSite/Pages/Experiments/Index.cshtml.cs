@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace TestSite.Pages
+namespace TestSite.Pages.Experiments
 {
     public class IndexModel : PageModel
     {
-        public ActionResult OnGet()
+        public void OnGet()
         {
-            return Redirect("/Identity/Account/Login");
+
         }
     }
 }

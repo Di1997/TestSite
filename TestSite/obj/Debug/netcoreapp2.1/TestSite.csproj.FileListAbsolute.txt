@@ -16,8 +16,6 @@ D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.TagHelpers.input.cac
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.TagHelpers.output.cache
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.RazorCoreGenerate.cache
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
-D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\About.g.cshtml.cs
-D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Contact.g.cshtml.cs
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Error.g.cshtml.cs
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Index.g.cshtml.cs
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Privacy.g.cshtml.cs
@@ -38,3 +36,4 @@ D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Orders\Delete.g.c
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Orders\Details.g.cshtml.cs
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Orders\Edit.g.cshtml.cs
 D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Orders\Index.g.cshtml.cs
+D:\Sites\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Experiments\Index.g.cshtml.cs

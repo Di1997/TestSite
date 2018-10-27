@@ -1,0 +1,24 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<ul class="pagination" id="buttons">
+    <li id="1"><a>1</a></li>
+</ul>
+
+@section scripts {
+    
+    <script>
+        function test() {
+            var count = $($(this).parent()).children().length;
+            $(this).addClass("active");
+            $("#buttons").append($(`<li id='${count + 1}'><a>${count + 1}</a></li>`));
+            $(this).unbind("click");
+            $($(this).next()).bind("click",test);
+        }
+        $($("#buttons").children()[0]).click(test);
+    </script>
+}
