@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,17 +10,14 @@ namespace TestSite.Models
 {
     public class Simple_User
     {
-        [Required, Key]
+        [Key]
         public Guid ID { get; set; }
 
-        [Required]
         public string Name { get; set; }
-
-        [Required]
         public string Code { get; set; }
-
         public string Address { get; set; }
         public int Discount { get; set; }
+        public bool Validated { get; set; }
     }
 
     public class Order
