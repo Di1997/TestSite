@@ -11,7 +11,12 @@ namespace TestSite.Pages
     {
         public ActionResult OnGet()
         {
-            return Redirect("/Identity/Account/Login");
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Identity/Account/Login?from_index=true");
+            }
+
+            return null;
         }
     }
 }
