@@ -6,7 +6,7 @@
 @inject ApplicationDbContext context
 
 @{
-    Simple_User user = null;
+ Simple_User user = null;
  if (SignInManager.IsSignedIn(User))
  {
      user = context.Simple_User.FirstOrDefault(m => m.ID == Guid.Parse(UserManager.GetUserId(User)));
@@ -26,7 +26,7 @@
                 {
                     <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
                 }
-            </li>111
+            </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
             </li>

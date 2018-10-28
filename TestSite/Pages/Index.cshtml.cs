@@ -14,6 +14,8 @@ namespace TestSite.Pages
     {
         private readonly ApplicationDbContext _context;
 
+        public bool _Validated;
+
         public UserManager<IdentityUser> _user;
         public IndexModel(UserManager<IdentityUser> UserManager, ApplicationDbContext context)
         {
@@ -32,6 +34,7 @@ namespace TestSite.Pages
             _Simple_User = _context.Simple_User.FirstOrDefault(m => m.ID == Guid.Parse(_user.GetUserId(User)));
             if(_Simple_User == null)
             { return Redirect("/Registration_2"); }
+            _Validated = _Simple_User.Validated;
             return null;
         }
     }
