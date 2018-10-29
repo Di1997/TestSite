@@ -41,8 +41,11 @@ namespace TestSite
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -66,7 +69,7 @@ namespace TestSite
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -88,6 +91,54 @@ namespace TestSite
             app.UseSession();
 
             app.UseMvc();
+
+            SeedRoles(serviceProvider).Wait();
+        }
+
+        private async Task SeedRoles(IServiceProvider serviceProvider)
+        {
+            //initializing custom roles   
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            string[] roleNames = { "Manager", "User"};
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    //create the roles and seed them to the database: Question 1  
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            IdentityUser user = await UserManager.FindByEmailAsync("Admin@test.com");
+
+            if (user == null)
+            {
+                user = new IdentityUser()
+                {
+                    UserName = "Admin@test.com",
+                    Email = "Admin@test.com",
+                };
+                await UserManager.CreateAsync(user, "admin");
+            }
+            await UserManager.AddToRoleAsync(user, "Manager");
+
+
+            IdentityUser user1 = await UserManager.FindByEmailAsync("User@test.com");
+
+            if (user1 == null)
+            {
+                user1 = new IdentityUser()
+                {
+                    UserName = "User@test.com",
+                    Email = "User@test.com",
+                };
+                await UserManager.CreateAsync(user1, "user");
+            }
+            await UserManager.AddToRoleAsync(user1, "User");
         }
     }
 }

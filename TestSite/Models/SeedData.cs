@@ -15,7 +15,6 @@ namespace TestSite.Models
             //using (var context = new ApplicationDbContext(
             //    serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             //{
-            //    // Look for any movies.
             //    if (context.UserRoles.Any())
             //    {
             //        return;   // DB has been seeded
