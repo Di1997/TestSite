@@ -1,1 +1,2 @@
-﻿
+﻿Implement admin page
+Implement admin layout

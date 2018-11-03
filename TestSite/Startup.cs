@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using TestSite.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TestSite.Statics;
 
 namespace TestSite
 {
@@ -123,8 +124,8 @@ namespace TestSite
                     Email = "Admin@test.com",
                 };
                 await UserManager.CreateAsync(user, "admin");
+                await UserManager.AddToRoleAsync(user, Roles.Manager);
             }
-            await UserManager.AddToRoleAsync(user, "Manager");
 
 
             IdentityUser user1 = await UserManager.FindByEmailAsync("User@test.com");
@@ -137,8 +138,8 @@ namespace TestSite
                     Email = "User@test.com",
                 };
                 await UserManager.CreateAsync(user1, "user");
+                await UserManager.AddToRoleAsync(user1, Roles.User);
             }
-            await UserManager.AddToRoleAsync(user1, "User");
         }
     }
 }

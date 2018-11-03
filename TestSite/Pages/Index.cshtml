@@ -8,16 +8,6 @@
 @{
     ViewData["Title"] = "Home page";
 
-    if (!Model._Validated)
-    {
-        <div class="jumbotron">
-            <h2 class="display-4">Warning, your account is still inactive!</h2>
-            <p class="lead">Please wait until administrator will approve your request and only then you'll be able to access the rest of the site</p>
-        </div>
-    }
-    else
-    {
-        <h3> Id = @UserManager.GetUserId(User)</h3>
-        <h1> test = </h1>
-    }
+    <h3> Id = @UserManager.GetUserId(User)</h3>
+    <h1> test = </h1>
 }

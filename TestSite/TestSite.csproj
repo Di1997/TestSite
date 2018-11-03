@@ -21,6 +21,7 @@
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Pages\Controls\Accounts\" />
     <Folder Include="Pages\Controls\Products\" />
+    <Folder Include="Pages\User\" />
   </ItemGroup>
 
   <ItemGroup>
