@@ -13,7 +13,7 @@ namespace TestSite.Pages.Admin
     public class IndexModel : PageModel
     {
 
-        public DBParams dBParams;
+        DBParams dBParams;
 
         public IndexModel(UserManager<IdentityUser> UserManager, ApplicationDbContext context)
         {

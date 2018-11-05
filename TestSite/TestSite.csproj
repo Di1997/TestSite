@@ -25,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Site_JS\Admin.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="Pages\Experiments\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

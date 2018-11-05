@@ -29,6 +29,11 @@ namespace TestSite.Classes
             get { return Context.Simple_User.FirstOrDefault(m => m.ID == Guid.Parse(UserManager.GetUserId(User))); }
         }
 
+        public Simple_User GetSimple_User(Guid userID)
+        {
+            return Context.Simple_User.FirstOrDefault(m => m.ID == userID);
+        }
+
         public async Task<bool> IsUserAdminAsync()
         {
             return await UserManager.IsInRoleAsync(IdentityUser, Roles.Manager);
@@ -38,8 +43,12 @@ namespace TestSite.Classes
         {
             get
             {
-                IsUserAdminAsync().Wait();
-                return IsUserAdminAsync().Result;
+                if (IdentityUser != null)
+                {
+                    IsUserAdminAsync().Wait();
+                    return IsUserAdminAsync().Result;
+                }
+                else return false;
             }
         }
 
@@ -72,6 +81,13 @@ namespace TestSite.Classes
             }
         }
 
+        public IdentityUser GetIdentityUser(string id)
+        {
+            var GetIdentityUser = UserManager.FindByIdAsync(id);
+            GetIdentityUser.Wait();
+            return GetIdentityUser.Result;
+        }
+
         public ActionResult CanAccessAdmin
         {
             get
@@ -84,5 +100,6 @@ namespace TestSite.Classes
                 return null;
             }
         }
+
     }
 }

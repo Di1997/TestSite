@@ -10,5 +10,6 @@ namespace TestSite.Statics
         public const string InvalidUser = "~/Errors/InvalidUser";
         public const string NotAdmin = "~/Errors/NotAdmin";
         public const string Registation2 = "~/Registration_2";
+        public const string ASPAdminUserPage = "/Admin/Index";
     }
 }
