@@ -7,6 +7,6 @@ namespace TestSite.Statics
 {
     public class Routes
     {
-        public const string AdminRoute = "admin/[controller]/[action]";
+        public const string ControllerRoute = "controllers/[controller]/[action]";
     }
 }

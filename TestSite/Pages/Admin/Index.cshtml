@@ -22,19 +22,7 @@
             <th scope="col">Validated</th>
         </tr>
     </thead>
-    <tbody id="Table">
-        @foreach (var i in SimpleUsers)
-        {
-        <tr>
-            <td>@i.ID</td>
-            <td>@i.Name</td>
-            <td>@i.Code</td>
-            <td>@i.Address</td>
-            <td>@i.Discount</td>
-            <td>@i.Validated</td>
-        </tr>
-        }
-    </tbody>
+    <tbody id="Table"></tbody>
 </table>
 
 <div class="modal fade" id="Editor">
@@ -71,7 +59,7 @@
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="CheckVerify">
-                    <label class="form-check-label" for="CheckVerify">Verified?</label>
+                    <label class="form-check-label" for="CheckVerify">Validated?</label>
                 </div>
             </div>
             <div class="modal-footer">
@@ -87,7 +75,8 @@
 @*<script src="~/Site_JS/Admin.js"></script>*@
     <script>
 
-        $("#Table").children().on("click", edit);
+        $("document").ready(formLoad);
+
         $("#submit").click(formSubmit);
         $("#delete").click(formDelete);
 
@@ -102,7 +91,7 @@
             $("#Address").val($(caller.children()[3]).text());
             $("#Discount").val($(caller.children()[4]).text());
 
-            $("#CheckVerify").prop('checked', $(caller.children()[5]).text() == "True");
+            $("#CheckVerify").prop('checked', $(caller.children()[5]).text() == "Validated");
 
             modal.modal('toggle');
         }
@@ -123,26 +112,45 @@
                 return false;
             } else {
                 $.ajax({
-                    url: "admin/admin/UpdateUser",
+                    url: "controllers/admin/UpdateUser",
                     method: "PUT",
                     contentType: "application/json",
-                    data: JSON.stringify(form)
+                    data: JSON.stringify(form),
+                    success: function () { formLoad();}
                 });
             }
             $("#Editor").modal('toggle');
 
-            location.reload();
+            
         }
 
         function formDelete() {
             var ID = $("#ID").val();
 
             $.ajax({
-                url: "admin/admin/DeleteUser?id="+ID,
+                url: "controllers/admin/DeleteUser?id="+ID,
                 method: "DELETE",
             });
 
-            location.reload();
+            formLoad();
+        }
+
+        function formLoad() {
+            $("#Table").empty();
+
+            $.ajax({
+                url: "controllers/admin/GetUsers",
+                dataType: "json",
+                success: function (result) {
+                    for (var i in result)
+                    {
+                        var a = result[i];
+                        var builder = `<td>${a.id}</td><td>${a.name}</td><td>${a.code}</td><td>${a.address}</td><td>${a.discount}</td><td>${a.validated? "Validated" : "Waiting to be validated"}</td>`;
+                        $("#Table").append(`<tr>${builder}</tr>`);
+                    }
+                    $("#Table").children().on("click", edit);
+                },
+            });            
         }
 
     </script>

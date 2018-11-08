@@ -13,7 +13,7 @@ using TestSite.Statics;
 
 namespace TestSite.Controllers
 {
-    [Route(Routes.AdminRoute)]
+    [Route(Routes.ControllerRoute)]
     [ApiController]
     public class AdminController : ControllerBase
     {
@@ -46,6 +46,12 @@ namespace TestSite.Controllers
             dBParams.Context.Remove(simple_User);
             dBParams.Context.SaveChanges();
             dBParams.UserManager.DeleteAsync(dBParams.GetIdentityUser(id)).Wait();
+        }
+
+        [HttpGet]
+        public JsonResult GetUsers()
+        {
+            return new JsonResult(dBParams.Context.Simple_User);
         }
     }
 }
