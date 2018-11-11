@@ -24,6 +24,8 @@ namespace TestSite.Controllers
             dBParams = new DBParams(UserManager, context);
         }
 
+        #region Users
+
         [HttpPut]
         public void UpdateUser(Simple_User user)
         {
@@ -33,8 +35,6 @@ namespace TestSite.Controllers
             simple_User.Address = user.Address;
             simple_User.Discount = user.Discount;
             simple_User.Validated = user.Validated;
-
-            //dBParams.Context.Attach(simple_User).State = EntityState.Modified;
 
             dBParams.Context.SaveChanges();
         }
@@ -53,5 +53,52 @@ namespace TestSite.Controllers
         {
             return new JsonResult(dBParams.Context.Simple_User);
         }
+
+        #endregion
+
+        #region Products
+        [HttpGet]
+        public Product GenerateProductInfo()
+        {
+            return new Product
+            {
+                ID = Guid.NewGuid(),
+                Code = dBParams.GenerateProductCode()
+            };
+        }
+
+        [HttpPost]
+        public void AddProduct(Product product)
+        {
+            dBParams.Context.Product.Add(new Product {
+                ID = product.ID,
+                Category = product.Category,
+                Code = product.Code,
+                Name = product.Name,
+                Price = product.Price });
+
+            dBParams.Context.SaveChanges();
+        }
+
+        [HttpDelete]
+        public void DeleteProduct(Guid id)
+        {
+            Product product = dBParams.GetProduct(id);
+            dBParams.Context.Remove(product);
+            dBParams.Context.SaveChanges();
+        }
+
+        [HttpPut]
+        public void UpdateProduct(Product p)
+        {
+            Product product = dBParams.GetProduct(p.ID);
+
+            product.Name = p.Name;
+            product.Price = p.Price;
+            product.Category = p.Category;
+
+            dBParams.Context.SaveChanges();
+        }
+        #endregion
     }
 }

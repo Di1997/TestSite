@@ -4,12 +4,13 @@
     "\\TestSite",
     "\\TestSite\\Models",
     "\\TestSite\\Pages",
+    "\\TestSite\\Pages\\Shared",
     "\\TestSite\\wwwroot",
     "\\TestSite\\wwwroot\\lib",
     "\\TestSite\\wwwroot\\lib\\bootstrap",
     "\\TestSite\\wwwroot\\lib\\bootstrap\\dist",
     "\\TestSite\\wwwroot\\lib\\bootstrap\\dist\\css"
   ],
-  "SelectedNode": "\\TestSite\\Pages\\Index.cshtml",
+  "SelectedNode": "\\TestSite.sln",
   "PreviewInSolutionExplorer": false
 }

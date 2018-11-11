@@ -1,13 +1,7 @@
 ﻿@page
-@model TestSite.Pages.Admin.IndexModel
+@model TestSite.Pages.Admin.UsersModel
 
-@inject UserManager<IdentityUser> UserManager
-@inject ApplicationDbContext context
-
-@{
-    var SimpleUsers = context.Simple_User;
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Users"; }
 
 <h2>Users</h2>
 
@@ -31,9 +25,6 @@
             <div class="modal-header">
                 <h3 class="modal-title">
                     Edit user
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </h3>
             </div>
             <div class="modal-body">
@@ -72,7 +63,6 @@
 </div>
 
 @section scripts {
-@*<script src="~/Site_JS/Admin.js"></script>*@
     <script>
 
         $("document").ready(formLoad);
@@ -107,12 +97,18 @@
                 Validated: $("#CheckVerify").prop('checked')
             };
 
-            if ((form.Discount > 100 || form.Discount < 0) || isNaN(form.Discount)) {
+            if (form.ID == "" || form.Name == "" || form.Code == "")
+            {
+                alert("All fields excluding Address and Discount must be filled!");
+                return false;
+            }
+
+            else if ((form.Discount > 100 || form.Discount < 0) || isNaN(form.Discount)) {
                 alert("Invalid discount! Must be between 0 and 100!");
                 return false;
             } else {
                 $.ajax({
-                    url: "controllers/admin/UpdateUser",
+                    url: "/controllers/admin/UpdateUser",
                     method: "PUT",
                     contentType: "application/json",
                     data: JSON.stringify(form),
@@ -128,7 +124,7 @@
             var ID = $("#ID").val();
 
             $.ajax({
-                url: "controllers/admin/DeleteUser?id="+ID,
+                url: "/controllers/admin/DeleteUser?id="+ID,
                 method: "DELETE",
             });
 
@@ -139,7 +135,7 @@
             $("#Table").empty();
 
             $.ajax({
-                url: "controllers/admin/GetUsers",
+                url: "/controllers/admin/GetUsers",
                 dataType: "json",
                 success: function (result) {
                     for (var i in result)

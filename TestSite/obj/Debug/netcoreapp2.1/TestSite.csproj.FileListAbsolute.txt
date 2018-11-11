@@ -120,7 +120,6 @@ C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Are
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.g.cshtml.cs
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
-C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Admin\Index.g.cshtml.cs
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Error.g.cshtml.cs
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Errors\InvalidUser.g.cshtml.cs
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Errors\NotAdmin.g.cshtml.cs
@@ -145,3 +144,5 @@ C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.dll
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.pdb
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.csproj.CopyComplete
+C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Admin\Users.g.cshtml.cs
+C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Admin\Products.g.cshtml.cs

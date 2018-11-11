@@ -101,5 +101,20 @@ namespace TestSite.Classes
             }
         }
 
+        public string GenerateProductCode()
+        {
+            Random random = new Random();
+
+            char[] chars = { (char)('A' + random.Next(0, 26)), (char)('A' + random.Next(0, 26)) };
+            string letters = new string(chars);
+            string code = $"{random.Next(10, 99)}-{random.Next(1000,9999)}-{letters}{random.Next(10,99)}";
+            return code;
+        }
+
+        public Product GetProduct(Guid id)
+        {
+            return Context.Product.FirstOrDefault(p => p.ID ==id);
+        }
+
     }
 }

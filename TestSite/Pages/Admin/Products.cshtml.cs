@@ -10,12 +10,11 @@ using TestSite.Data;
 
 namespace TestSite.Pages.Admin
 {
-    public class IndexModel : PageModel
+    public class ProductsModel : PageModel
     {
-
         DBParams dBParams;
 
-        public IndexModel(UserManager<IdentityUser> UserManager, ApplicationDbContext context)
+        public ProductsModel(UserManager<IdentityUser> UserManager, ApplicationDbContext context)
         {
             dBParams = new DBParams(UserManager, context);
         }
