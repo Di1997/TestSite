@@ -12,5 +12,6 @@ namespace TestSite.Statics
         public const string Registation2 = "~/Registration_2";
         public const string ASPAdminUserPage = "/Admin/Users";
         public const string ASPAdminProductsPage = "/Admin/Products";
+        public const string ASPAdminOrdersPage = "/Admin/Orders";
     }
 }

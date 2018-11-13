@@ -116,5 +116,12 @@ namespace TestSite.Classes
             return Context.Product.FirstOrDefault(p => p.ID ==id);
         }
 
+        public Order[] UserOrders
+        {
+            get
+            {
+                return Context.Order.Where(o => o.Customer_ID == SimpleUser.ID).ToArray();
+            }
+        }
     }
 }

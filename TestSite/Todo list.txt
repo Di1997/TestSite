@@ -1,4 +1,5 @@
 ﻿Implement products page (Replace current Index page)
+-Uhh. Finish cart. Add removing of elements. Add changing amount. Will take few more days
 
 Implement orders
 -User can have only one order with null status. Which is his unfinished order. Used to collect order elements

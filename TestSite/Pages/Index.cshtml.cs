@@ -32,7 +32,7 @@ namespace TestSite.Pages
 
             if(dBParams.IsUserAdmin)
             {
-                return new RedirectResult(Statics.Pages.ASPAdminUserPage);
+                return new RedirectResult(Statics.Pages.ASPAdminOrdersPage);
             }
             return dBParams.CanAccessServices;
         }

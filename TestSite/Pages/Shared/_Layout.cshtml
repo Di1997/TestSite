@@ -1,5 +1,6 @@
 ﻿@inject UserManager<IdentityUser> UserManager
 @inject ApplicationDbContext context
+@inject SignInManager<IdentityUser> SignInManager
 
 @using TestSite.Classes
 @using TestSite.Statics
@@ -8,7 +9,8 @@
     dB.User = User;
 
     var InvalidUsers = dB.Context.Simple_User.Where(m => m.Validated == false);
- }
+    var NewOrders = dB.Context.Order.Where(o => o.Status == OrderStatus.New);
+}
 
 <!DOCTYPE html>
 <html>
@@ -41,26 +43,40 @@
                 <a class="navbar-brand nohover">TestSite</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if(dB.IsUserAdmin)
-                    {
-                    <li>
-                        <a asp-page=@Pages.ASPAdminUserPage>
-                            Users
-                            @if (InvalidUsers.Count() > 0)
-                            {
-                                <span class="badge badge-pill badge-light">
-                                    @InvalidUsers.Count()
-                                </span>
-                            }
-                        </a>
-                    </li>
-                    <li><a asp-page=@Pages.ASPAdminProductsPage>Products</a></li>  
-                    } else
-                    {
-                        <li><a asp-page="/Index">Shop</a></li>
-                    }
-                </ul>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <ul class="nav navbar-nav">
+                        @if (dB.IsUserAdmin)
+                        {
+                            <li>
+                                <a asp-page=@Pages.ASPAdminUserPage>
+                                    Users
+                                    @if (InvalidUsers.Count() > 0)
+                                    {
+                                        <span class="badge badge-pill badge-light">
+                                            @InvalidUsers.Count()
+                                        </span>
+                                    }
+                                </a>
+                            </li>
+                            <li><a asp-page=@Pages.ASPAdminProductsPage>Products</a></li>
+                            <li><a asp-page="/Admin/Orders">
+                                Orders
+                                @if (NewOrders.Count() > 0)
+                                {
+                                    <span class="badge badge-pill badge-light">
+                                        @NewOrders.Count()
+                                    </span>
+                                }
+                            </a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-page="/Index">Shop</a></li>
+                            <li><a asp-page="/User/Orders">Orders</a></li>
+                        }
+                    </ul>
+                }
                 <partial name="_LoginPartial" />
             </div>
         </div>

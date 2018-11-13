@@ -146,3 +146,5 @@ C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\TestSite.csproj.CopyComplete
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Admin\Users.g.cshtml.cs
 C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Admin\Products.g.cshtml.cs
+C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\User\Orders.g.cshtml.cs
+C:\Users\Di1997\Source\Repos\TestSite\TestSite\obj\Debug\netcoreapp2.1\Razor\Pages\Admin\Orders.g.cshtml.cs

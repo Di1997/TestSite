@@ -100,5 +100,81 @@ namespace TestSite.Controllers
             dBParams.Context.SaveChanges();
         }
         #endregion
+
+        #region Orders
+
+        [HttpGet]
+        public List<object> GetOrders()
+        {
+            var Orders = dBParams.Context.Order.Where(o => o.Status != null).OrderByDescending(o => o.Order_Date);
+
+            List<object> FilteredObjects = new List<object>();
+
+            var test = Orders.First();
+
+            foreach(var i in Orders)
+            {
+                FilteredObjects.Add(new
+                {
+                    i.ID,
+                    i.Customer_ID,
+                    Customer_name = dBParams.Context.Simple_User.FirstOrDefault(u => u.ID == i.Customer_ID).Name,
+                    Order_Date = i.Order_Date.ToString("dd/MM/yyyy HH:mm:ss"),
+                    Shipment_Date = i.Shipment_Date == DateTime.MinValue ? null : i.Shipment_Date.ToString("dd/MM/yyyy HH:mm:ss"),
+                    i.Order_Number,
+                    i.Status
+                });
+            };
+
+            return FilteredObjects;
+        }
+
+        [HttpGet]
+        public List<object> GetOrderElements(string id)
+        {
+            var Orders = dBParams.Context.Order_Element.Where(o => o.Order_ID == Guid.Parse(id));
+
+            List<object> FilteredObjects = new List<object>();
+
+            var test = Orders.First();
+
+            foreach (var i in Orders)
+            {
+                FilteredObjects.Add(new
+                {
+                    i.ID,
+                    i.Item_ID,
+                    ItemName = dBParams.Context.Product.FirstOrDefault(p => p.ID == i.Item_ID).Name,
+                    category = dBParams.Context.Product.FirstOrDefault(p => p.ID == i.Item_ID).Category,
+                    i.Items_Count,
+                    i.Item_Price,
+                    i.Order_ID
+                });
+            };
+
+            return FilteredObjects;
+        }
+
+        [HttpPut]
+        public void UpdateOrderStatus(string id)
+        {
+            var order = dBParams.Context.Order.FirstOrDefault(o => o.ID == Guid.Parse(id));
+            
+            switch (order.Status)
+            {
+                case OrderStatus.New:
+                    order.Status = OrderStatus.InProgress;
+                    break;
+
+                case OrderStatus.InProgress:
+                    order.Shipment_Date = DateTime.Now;
+                    order.Status = OrderStatus.Completed;
+                    break;
+            }
+
+            dBParams.Context.SaveChanges();
+        }
+
+        #endregion
     }
 }

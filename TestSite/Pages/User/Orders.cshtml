@@ -1,0 +1,148 @@
+﻿@page
+@model OrdersModel
+
+@inject ApplicationDbContext context
+@inject UserManager<IdentityUser> UserManager
+
+@using TestSite.Classes
+@using TestSite.Statics
+
+@{
+    DBParams db = new DBParams(UserManager, context);
+    db.User = User;
+    ViewData["Title"] = "Main page";
+}
+
+<h2>My Orders</h2>
+
+<div class="btn-group" data-toggle="buttons" id="Filters">
+    <label class="btn btn-primary"><input type="checkbox">@OrderStatus.New</label>
+    <label class="btn btn-primary"><input type="checkbox">@OrderStatus.InProgress</label>
+    <label class="btn btn-primary"><input type="checkbox">@OrderStatus.Completed</label>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Shipment Date</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody id="Table"></tbody>
+</table>
+
+<div class="modal fade" id="Info">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    Order detais
+                </h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Price per item</th>
+                            <th scope="col">Total price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="DetailsTable"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="delete">Delete order</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $("document").ready(RefreshOrders);
+        $("#delete").click(DeleteElement);
+        $("#Filters").children().change(UpdateFilters);
+
+        var Orders;
+
+        function RefreshOrders() {
+            $("#Table").empty();
+
+            $.ajax({
+                url: "/controllers/user/GetUserOrders",
+                success: function (result) {
+                    Orders = result;
+                    UpdateOrders();
+                }
+            });
+        }
+
+        function UpdateOrders(filters) {
+            var Table = $("#Table");
+            Table.empty();
+            var filtered;
+
+            if (filters != null && filters.length != 0) filtered = Orders.filter(function (i) { return filters.includes(i.status); });
+            else filtered = Orders;
+
+            for (var i in filtered) {
+                var a = filtered[i];
+                var builder = `<td>${a.order_Number}</td><td>${a.order_Date}</td><td>${a.shipment_Date}</td><td>${a.status}</td><input type="hidden" value="${a.id}"/>`;
+                $("#Table").append(`<tr>${builder}</tr>`);
+            }
+
+            $("#Table").children().click(ShowDetails);
+        }
+
+        function ShowDetails() {
+            var trigger = $(this);
+
+            $.ajax({
+                url: "/controllers/user/GetUserOrderElements?id=" + trigger.children("input").val(),
+                success: function (result) {
+                    $("#DetailsTable").empty();
+                    for (var i in result) {
+                        var a = result[i];
+                        var builder = `<td>${a.itemName}</td><td>${a.itemCategory}</td><td>${a.items_Count}</td><td>${a.item_Price} $</td><td>${a.item_Price * a.items_Count} $</td>`;
+                        $("#DetailsTable").append(`<tr>${builder}</tr>`);
+                    }
+                    $("#DetailsTable").append(`<input type="hidden" value="${trigger.children("input").val()}"/>`);
+
+                    if ($(trigger.children()[3]).text() == "@OrderStatus.New") { $("#delete").show(); } else { $("#delete").hide(); }
+                }
+            });
+
+
+            $("#Info").modal("show");
+        }
+
+        function DeleteElement() {
+            $.ajax({
+                url: "/controllers/user/DeleteUserOrder?id=" + $("#DetailsTable input:hidden").val(),
+                method: "DELETE",
+                success: function () { $("#Info").modal("hide"); RefreshOrders(); }
+            });
+        }
+
+        function UpdateFilters() {
+
+            var ActiveFilters = [];
+            var buttons = $(this).siblings().addBack();
+
+            for (i = 0; i < buttons.length; i++) {
+                if ($(buttons[i]).hasClass("active")) {
+                    ActiveFilters.push($(buttons[i]).text());
+                }
+            }
+
+            UpdateOrders(ActiveFilters);
+        };
+
+    </script>
+}
