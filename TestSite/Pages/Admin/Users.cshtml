@@ -126,7 +126,7 @@
             $.ajax({
                 url: "/controllers/admin/DeleteUser?id="+ID,
                 method: "DELETE",
-                success: formLoad
+                success: (function () { location.reload(); })
             });
 
             

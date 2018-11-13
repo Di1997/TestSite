@@ -68,7 +68,7 @@ namespace TestSite.Pages.Shared
                 Code = HttpContext.Session.GetString("Code"),
                 Validated = false,
                 Name = Input.Name,
-                Address = Input.Address,
+                Address = Input.Address == null? "" : Input.Address,
                 Discount = 0
             };
 

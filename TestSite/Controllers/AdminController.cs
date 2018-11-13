@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Console.Internal;
 using TestSite.Classes;
 using TestSite.Data;
 using TestSite.Models;
@@ -42,8 +43,13 @@ namespace TestSite.Controllers
         [HttpDelete]
         public void DeleteUser(string id)
         {
-            Simple_User simple_User = dBParams.GetSimple_User(Guid.Parse(id));
-            dBParams.Context.Remove(simple_User);
+            var UserOrders = dBParams.Context.Order.Where(o => o.Customer_ID == Guid.Parse(id));
+            var AllOrderElements = dBParams.Context.Order_Element.Where(o => UserOrders.Select(uo => uo.ID).Contains(o.Order_ID));
+
+            dBParams.Context.RemoveRange(AllOrderElements);
+            dBParams.Context.RemoveRange(UserOrders);
+            dBParams.Context.Remove(dBParams.GetSimple_User(Guid.Parse(id)));
+
             dBParams.Context.SaveChanges();
             dBParams.UserManager.DeleteAsync(dBParams.GetIdentityUser(id)).Wait();
         }
