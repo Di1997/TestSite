@@ -125,6 +125,8 @@
                     }
                     $("#DetailsTable").append(`<input type="hidden" value="${trigger.children("input").val()}"/>`)
 
+                    if ($(trigger.children()[5]).text() == "@OrderStatus.Completed") { $("#update").hide(); } else { $("#update").show(); }
+
                     $("#Info").modal("show");
                 }
             });
