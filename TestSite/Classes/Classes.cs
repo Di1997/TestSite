@@ -18,6 +18,8 @@ namespace TestSite.Classes
         public UserManager<IdentityUser> UserManager { get; set; }
         public ClaimsPrincipal User { get; set; }
 
+        public DBParams() { }
+
         public DBParams(UserManager<IdentityUser> UserManager, ApplicationDbContext Context)
         {
             this.Context = Context;
@@ -27,11 +29,6 @@ namespace TestSite.Classes
         public Simple_User SimpleUser
         {
             get { return Context.Simple_User.FirstOrDefault(m => m.ID == Guid.Parse(UserManager.GetUserId(User))); }
-        }
-
-        public Simple_User GetSimple_User(Guid userID)
-        {
-            return Context.Simple_User.FirstOrDefault(m => m.ID == userID);
         }
 
         public async Task<bool> IsUserAdminAsync()
@@ -109,11 +106,6 @@ namespace TestSite.Classes
             string letters = new string(chars);
             string code = $"{random.Next(10, 99)}-{random.Next(1000,9999)}-{letters}{random.Next(10,99)}";
             return code;
-        }
-
-        public Product GetProduct(Guid id)
-        {
-            return Context.Product.FirstOrDefault(p => p.ID ==id);
         }
 
         public Order[] UserOrders

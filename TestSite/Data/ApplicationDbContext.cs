@@ -14,9 +14,9 @@ namespace TestSite.Data
         {
         }
 
-        public DbSet<Simple_User> Simple_User { get; set; }
-        public DbSet<Order> Order { get; set; }
-        public DbSet<Order_Element> Order_Element { get; set; }
-        public DbSet<Product> Product { get; set; }
+        public virtual DbSet<Simple_User> Simple_User { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Order_Element> Order_Element { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
     }
 }
